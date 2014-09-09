@@ -79,11 +79,11 @@ def copy_project(path_to_there):
         return path_to_here.parent
 
     def paths_to_project_files():
+        ignores = ['.*', '/.*/', '*files.py', 'projects']
         return list(path_to_projects().walkfiles(ignores=ignores))
 
     path_to_there.assert_isdir()
     new_project_name = path_to_there.namebase
-    ignores = ['.*', '/.*/', '*files.py']
     for path_to_project_file in paths_to_project_files():
         copy_path(path_to_project_file)
 
