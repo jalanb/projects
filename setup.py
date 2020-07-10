@@ -1,23 +1,41 @@
 """Set up the projects project"""
 
 
+from dataclasses import dataclass
 from setuptools import setup
 
 
-import projects
+import projects as project
 
+description = project.__doc__
+headline = description.splitlines()[0]
+name = project.__name__,
+version = project.__version__,
+
+@dataclass
+class User:
+    service: str
+    username: str
+    email: str
+
+    def url(self, name):
+        return f'https://{self.service}/{self.username}/{name}'
+
+user = User('github', 'jalanb', 'github@al-got-rhythm.net', 'J Alan Brogan')
 
 setup(
-    name='projects',
-    version=projects.__version__,
-    url='https://github.com/jalanb/projects',
+    name=name,
+    version=version,
+    description=headline,
+    long_description=description,
+    url=user.url,
+    download_url='{user.url(name)}/tarball/v{version}',
     license='MIT License',
-    author='J Alan Brogan',
-    author_email='projects@al-got-rhythm.net',
-    description='Provide skeletal outlines for any of my future projects',
+    author=user.name,
+    author_email=user.email,
     platforms='any',
     classifiers=[
-        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.7',
         'Development Status :: 1 - Planning',
         'Natural Language :: English',
         'Environment :: Console',
@@ -26,11 +44,9 @@ setup(
         'Operating System :: OS Independent',
         'Topic :: Software Development :: Build Tools',
     ],
-    scripts=['bin/projects'],
-    test_suite='nose.collector',
-    tests_require=['nose'],
+    tests_require=['pytest'],
     extras_require={
         'docs': ['Sphinx'],
-        'testing': ['nose'],
+        'testing': ['pytest'],
     }
 )
