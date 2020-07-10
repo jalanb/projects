@@ -1,11 +1,7 @@
 """Test the projects package"""
-
-
 import unittest
 
-
 import projects
-
 
 def test_doc():
     """The module should be documented"""
