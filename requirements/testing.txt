@@ -1,0 +1,8 @@
+-r requirements.txt
+-r linting.txt
+
+codecov
+coverage
+pytest
+pytest-cov
+tox
